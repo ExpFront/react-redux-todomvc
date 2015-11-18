@@ -1,0 +1,56 @@
+.section-intro {
+	height: 100vh;
+	width: 100vw;
+
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+.h2-intro {
+	margin-bottom: 25px;
+}
+
+.input-group {
+	width: 100%;
+}
+
+.form-control {
+	border-width: 1px;
+	border-radius: 4px 0px 0px 0px;
+}
+
+
+.searchMenuField {
+	width: 100%;
+	height: auto;
+	background-color: #c3c0c0;
+	border-top: 0px;
+  cursor: pointer;
+}
+
+.searchMenuField ul {
+  color: white;
+	padding: 0;
+	list-style: none;
+}
+
+.searchMenuField ul li {
+	background-color: #357EBD;
+	border-bottom: 1px solid black;
+	cursor: pointer;
+}
+
+.searchMenuField ul li:hover {
+	background-color: #55B0FF;
+}
+
+
+label {
+  margin-left: 5px;
+}
+
+fa {
+	margin-left: 50px;
+	display: inline-block;
+}
