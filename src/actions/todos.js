@@ -1,4 +1,4 @@
-import { ADD_TODO, ADD_INITIAL_ACTIVE_TODO, ADD_ACTIVE_TODO, REMOVE_ACTIVE_TODO, ADD_COMPLETED_TODO, REMOVE_COMPLETED_TODO, SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED, IS_CHECKED, REMOVE_TODO } from '../constants/todos';
+import { ADD_TODO, ADD_ACTIVE_TODO, REMOVE_ACTIVE_TODO, ADD_COMPLETED_TODO, REMOVE_COMPLETED_TODO, SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED, IS_CHECKED, REMOVE_TODO } from '../constants/todos';
 
 export function showAll() {
   return {
@@ -28,14 +28,6 @@ export function addTodo(data) {
 export function addActiveTodo(data, id) {
   return {
     type: ADD_ACTIVE_TODO,
-    data,
-    id,
-  };
-}
-
-export function addInitialActiveTodo(data, id) {
-  return {
-    type: ADD_ACTIVE_INITIAL_TODO,
     data,
     id,
   };

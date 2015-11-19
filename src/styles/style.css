@@ -1,7 +1,10 @@
+body {
+	background-color: #F5F5F5;
+}
+
 .section-intro {
 	height: 100vh;
 	width: 100vw;
-
 	background-size: cover;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -11,46 +14,66 @@
 	margin-bottom: 25px;
 }
 
-.input-group {
+.todoApp {
 	width: 100%;
+  box-shadow: 0 25px 25px 25px rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
-.form-control {
-	border-width: 1px;
-	border-radius: 4px 0px 0px 0px;
+.input-group {
+	width: 100.2%;
 }
-
 
 .searchMenuField {
 	width: 100%;
 	height: auto;
-	background-color: #c3c0c0;
-	border-top: 0px;
+	background-color: #FFF;
   cursor: pointer;
 }
 
 .searchMenuField ul {
-  color: white;
+	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
 .searchMenuField ul li {
-	background-color: #357EBD;
-	border-bottom: 1px solid black;
+	background-color: #FFF;
+	border-bottom: 1px solid #ededed;
+	padding: 8px;
 	cursor: pointer;
 }
 
 .searchMenuField ul li:hover {
-	background-color: #55B0FF;
+	background-color: #F5F5F5;
 }
+
+
+.close {
+	float: right;
+	visibility: hidden;
+}
+
+.searchMenuField ul li:hover .close {
+	visibility: visible;
+}
+
 
 
 label {
+	transition: color 0.4s;
   margin-left: 5px;
 }
 
-fa {
-	margin-left: 50px;
-	display: inline-block;
+.lined-through {
+	text-decoration: line-through;
+	color: #A5A2A2;
+	transition: color 0.4s;
+}
+
+.todoAppFilters {
+	padding: 8px 0 8px 0;
+}
+
+.todoAppFilters .filterActive {
+	margin: 0 0px;
 }

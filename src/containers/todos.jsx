@@ -21,9 +21,9 @@ class TodoFilter extends React.Component{
   render() {
     if (this.props.todos.all) {
       return (
-        <div>
-          <span className='filterAll' onClick={this.showAll.bind(this)}>All|</span>
-          <span className='filterActive' onClick={this.showActive.bind(this)}>Active|</span>
+        <div className="todoAppFilters">
+          <span className='filterAll' onClick={this.showAll.bind(this)}>All</span>
+          <span className='filterActive' onClick={this.showActive.bind(this)}>Active</span>
           <span className='filterCompleted' onClick={this.showCompleted.bind(this)}>Completed</span>
         </div>
       )
@@ -39,21 +39,21 @@ class TodoList extends React.Component {
   handleOnCheckbox(id, e) {
     console.log('this is: ' + e.target.checked);
     if (e.target.checked == true) {
-      this.props.actions.addCompletedTodo(e.target.nextSibling.innerHTML, id);
+      this.props.actions.addCompletedTodo(this.refs.todoName.innerHTML, id);
       this.props.actions.isChecked(id, true);
       this.props.actions.removeActiveTodo(id);
     }
     if (e.target.checked == false) {
-      this.props.actions.removeCompletedTodo(e.target.nextSibling.innerHTML, id);
+      this.props.actions.removeCompletedTodo(this.refs.todoName.innerHTML, id);
       console.log('I AM RUNNING');
       this.props.actions.isChecked(id, false);
-      this.props.actions.addActiveTodo(e.target.nextSibling.innerHTML, id);
+      this.props.actions.addActiveTodo(this.refs.todoName.innerHTML, id);
     }
 
   }
 
-  removeTodo(e) {
-    this.props.actions.removeTodo(e.target.previousSibling.innerHTML);
+  removeTodo() {
+    this.props.actions.removeTodo(this.refs.todoName.innerHTML);
   }
 
   render() {
@@ -68,8 +68,8 @@ class TodoList extends React.Component {
                 return (
                   <li key={todo.id}>
                     <input id={todo.id} ref="checkbox" type="checkbox" checked={todo.isChecked} onChange={this.handleOnCheckbox.bind(this, todo.id)} />
-                    <label>{todo.name}</label>
-                    <fa onClick={this.removeTodo.bind(this)}>&#215;</fa>
+                    <label ref="todoName" className={todo.isChecked ? 'lined-through' : ''}>{todo.name}</label>
+                    <div className="close"><fa onClick={this.removeTodo.bind(this)}>&#215;</fa></div>
                   </li>
                 );
               })
@@ -91,7 +91,7 @@ class Landing extends React.Component{
 
     if (this.refs.input.value.length > 0) {
       this.props.actions.addTodo(this.refs.input.value);
-      this.props.actions.addInitialActiveTodo(this.refs.input.value);
+      this.props.actions.addActiveTodo(this.refs.input.value);
     }
 
     this.refs.input.value = '';
@@ -102,16 +102,19 @@ class Landing extends React.Component{
       <section className="section-intro">
          <div className="container-fluid">
            <div className="row text-center">
-             <div className="entry col-xs-12 text-center">
-               <div className="col-xs-12 col-md-8 col-md-offset-2 text-center">
-                 <form onSubmit={this.handleOnSubmit.bind(this)}>
-                   <h2 className="h2-intro">TodoMVC</h2>
-                   <div className="input-group">
-                     <input className="form-control" type="text" ref="input" placeholder="What needs to be done?" />
+             <div className="col-xs-12">
+               <div className="col-xs-12 col-md-8 col-md-offset-2">
+                 <h2 className="h2-intro">TodoMVC</h2>
+                 <div className="todoApp">
+                   <form onSubmit={this.handleOnSubmit.bind(this)}>
+
+                     <div className="input-group">
+                       <input className="form-control" type="text" ref="input" placeholder="What needs to be done?" />
+                     </div>
+                   </form>
+                   <div className="searchMenuField">
+                    <TodoList actions={this.props.actions} todos={this.props.todos} />
                    </div>
-                 </form>
-                 <div className="searchMenuField">
-                  <TodoList actions={this.props.actions} todos={this.props.todos} />
                  </div>
                </div>
              </div>

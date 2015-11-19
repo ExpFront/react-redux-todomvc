@@ -1,6 +1,5 @@
 export const ADD_TODO = 'todo.add';
 export const ADD_ACTIVE_TODO = 'todo.active.add';
-export const ADD_INITIAL_ACTIVE_TODO = 'todo.active.initial.add';
 export const REMOVE_ACTIVE_TODO = 'todo.active.remove';
 export const ADD_COMPLETED_TODO = 'todo.completed.add';
 export const REMOVE_COMPLETED_TODO = 'todo.completed.remove';
