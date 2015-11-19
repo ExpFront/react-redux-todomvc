@@ -91,7 +91,7 @@ class Landing extends React.Component{
 
     if (this.refs.input.value.length > 0) {
       this.props.actions.addTodo(this.refs.input.value);
-      this.props.actions.addActiveTodo(this.refs.input.value);
+      this.props.actions.addInitialActiveTodo(this.refs.input.value);
     }
 
     this.refs.input.value = '';

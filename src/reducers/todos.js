@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions';
-import { ADD_TODO, ADD_ACTIVE_TODO, REMOVE_ACTIVE_TODO, ADD_COMPLETED_TODO, REMOVE_COMPLETED_TODO, SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED, IS_CHECKED, REMOVE_TODO } from '../constants/todos';
+import { ADD_TODO, ADD_INITIAL_ACTIVE_TODO, ADD_ACTIVE_TODO, REMOVE_ACTIVE_TODO, ADD_COMPLETED_TODO, REMOVE_COMPLETED_TODO, SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED, IS_CHECKED, REMOVE_TODO } from '../constants/todos';
 
 const all = [];
 const active = [];
@@ -25,6 +25,15 @@ const todos = handleActions({
     return {
       ...state,
       all,
+    };
+  },
+
+  [ADD_INITIAL_ACTIVE_TODO]: (state, action) => {
+    active.push({'name': action.data, 'id': active.length, 'isChecked': false});
+
+    return {
+      ...state,
+      active,
     };
   },
 
