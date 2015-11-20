@@ -16,7 +16,7 @@ body {
 
 .todoApp {
 	width: 100%;
-  box-shadow: 0 25px 25px 25px rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 .input-group {
@@ -27,7 +27,6 @@ body {
 	width: 100%;
 	height: auto;
 	background-color: #FFF;
-  cursor: pointer;
 }
 
 .searchMenuField ul {
@@ -50,14 +49,27 @@ body {
 
 .close {
 	float: right;
+	display: block;
 	visibility: hidden;
+}
+
+
+fa {
+	width: 10px;
+	height: 10px;
+	font-size: 20px;
+	color: #cc9a9a;
+	margin-bottom: 11px;
+	transition: color 0.2s -out;
+}
+
+fa:hover {
+	color: rgb(175, 47, 47);
 }
 
 .searchMenuField ul li:hover .close {
 	visibility: visible;
 }
-
-
 
 label {
 	transition: color 0.4s;
@@ -70,10 +82,27 @@ label {
 	transition: color 0.4s;
 }
 
-.todoAppFilters {
+.todoAppFooter {
 	padding: 8px 0 8px 0;
+
 }
 
+.todoAppCount {
+	display: block;
+	float: left;
+}
+
+.todoAppFilters span {
+	cursor: pointer;
+}
+
+
 .todoAppFilters .filterActive {
-	margin: 0 5px;
+	margin: 0 8px;
+}
+
+.selected {
+	border: 1px solid rgba(175, 47, 47, 0.2);
+	padding: 3px 5px;
+	border-radius: 3px;
 }

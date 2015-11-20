@@ -63,9 +63,9 @@ export function isChecked(id, flag) {
   };
 }
 
-export function removeTodo(data) {
+export function removeTodo(id) {
   return {
     type: REMOVE_TODO,
-    data,
+    id,
   };
 }
