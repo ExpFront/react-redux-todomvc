@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/todos';
 
+class TodoFilter extends React.Component {
 
-class TodoFilter extends React.Component{
 
   showAll(e) {
     this.props.actions.showAll();
@@ -28,7 +28,7 @@ class TodoFilter extends React.Component{
   }
 
   render() {
-    if (this.props.todos.all) {
+    if (this.props.todos.all.length > 0) {
       return (
         <div className="todoAppFooter row">
           <div className="todoAppCount col-xs-2 hidden-xs">{this.props.count} {this.props.count > 1 ? 'items left' : 'item left'}</div>
@@ -85,7 +85,7 @@ class TodoList extends React.Component {
   }
 };
 
-class Landing extends React.Component{
+class Landing extends React.Component {
 
   handleOnSubmit(e) {
     e.preventDefault();

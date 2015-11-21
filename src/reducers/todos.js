@@ -1,14 +1,14 @@
 import { handleActions } from 'redux-actions';
 import { ADD_TODO, ADD_ACTIVE_TODO, REMOVE_ACTIVE_TODO, ADD_COMPLETED_TODO, REMOVE_COMPLETED_TODO, SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED, IS_CHECKED, REMOVE_TODO } from '../constants/todos';
 
-const all = [];
+const all = (JSON.parse(localStorage.getItem('all'))) ? JSON.parse(localStorage.getItem('all')) : [];
 const active = [];
 const completed = [];
 const filtered = [];
 
 
 const initialState = {
-  all: undefined,
+  all: all,
   active: undefined,
   completed: undefined,
   filtered: all,
@@ -20,7 +20,7 @@ const todos = handleActions({
 
   [ADD_TODO]: (state, action) => {
     all.push({'name': action.data, 'id': all.length, 'isChecked': false});
-
+    localStorage.setItem('all', JSON.stringify(all));
 
     return {
       ...state,
@@ -73,6 +73,9 @@ const todos = handleActions({
     all.map((node) => {
       if (node.id >= action.id) node.id--;
     });
+
+    localStorage.setItem('all', JSON.stringify(all));
+
 
     return {
       ...state,
