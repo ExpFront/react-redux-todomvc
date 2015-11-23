@@ -1,86 +1,35 @@
 import { handleActions } from 'redux-actions';
 import { ADD_TODO, ADD_ACTIVE_TODO, REMOVE_ACTIVE_TODO, ADD_COMPLETED_TODO, REMOVE_COMPLETED_TODO, SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED, IS_CHECKED, REMOVE_TODO } from '../constants/todos';
 
-const all = (JSON.parse(localStorage.getItem('all'))) ? JSON.parse(localStorage.getItem('all')) : [];
-const active = [];
-const completed = [];
-const filtered = [];
-
-
-const initialState = {
-  all: all,
-  active: undefined,
-  completed: undefined,
-  filtered: all,
-  flag: undefined,
-};
+const initialState = [];
 
 
 const todos = handleActions({
 
   [ADD_TODO]: (state, action) => {
-    all.push({'name': action.data, 'id': all.length, 'isChecked': false});
-    localStorage.setItem('all', JSON.stringify(all));
 
-    return {
+    const all = {
+      id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+      name: action.data,
+      isChecked: false
+    };
+
+    return [
       ...state,
       all,
-    };
-  },
-
-  [SHOW_ALL]: (state, action) => {
-    const filtered = all;
-
-    return {
-      ...state,
-      filtered,
-    };
-  },
-
-  [SHOW_ACTIVE]: (state, action) => {
-    const filtered = all.filter((node) => {
-      return node.isChecked == false;
-    });
-
-    return {
-      ...state,
-      filtered,
-    };
-  },
-
-  [SHOW_COMPLETED]: (state, action) => {
-    const filtered = all.filter((node) => {
-      return node.isChecked == true;
-    });
-
-    return {
-      ...state,
-      filtered,
-    };
+    ];
   },
 
   [IS_CHECKED]: (state, action) => {
-    all[action.id].isChecked = action.flag;
 
-    return {
-      ...state,
-      all,
-    };
+    return state.map((node) =>
+      node.id === action.id ? { ...node, isChecked: !node.isChecked } : node)
   },
 
   [REMOVE_TODO]: (state, action) => {
-    all.splice(action.id, 1);
-    all.map((node) => {
-      if (node.id >= action.id) node.id--;
-    });
 
-    localStorage.setItem('all', JSON.stringify(all));
-
-
-    return {
-      ...state,
-    };
-  }
+    return state.filter(node => node.id !== action.id);
+  },
 
 }, initialState);
 

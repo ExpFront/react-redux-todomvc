@@ -3,11 +3,19 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/todos';
 
+// import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../constants/todos';
+//
+// const TODO_FILTERS = {
+//   [SHOW_ALL]: () => true,
+//   [SHOW_ACTIVE]: node => !node.isChecked,
+//   [SHOW_COMPLETED]: node => node.isChecked
+// };
+
+
 class TodoFilter extends React.Component {
 
-
   showAll(e) {
-    this.props.actions.showAll();
+    //const filtered = this.props.todos.filter(TODO_FILTERS[SHOW_ALL]);
     e.target.nextSibling.classList.remove('selected');
     e.target.classList.add('selected');
     e.target.nextSibling.nextSibling.classList.remove('selected');
@@ -17,18 +25,18 @@ class TodoFilter extends React.Component {
     e.target.previousSibling.classList.remove('selected');
     e.target.classList.add('selected');
     e.target.nextSibling.classList.remove('selected');
-    this.props.actions.showActive();
+    //const filtered = this.props.todos.filter(TODO_FILTERS[SHOW_ACTIVE]);
   }
 
   showCompleted(e) {
     e.target.previousSibling.previousSibling.classList.remove('selected');
     e.target.previousSibling.classList.remove('selected');
     e.target.classList.add('selected');
-    this.props.actions.showCompleted();
+    //const filtered = this.props.todos.filter(TODO_FILTERS[SHOW_COMPLETED]);
   }
 
   render() {
-    if (this.props.todos.all.length > 0) {
+    if (this.props.todos) {
       return (
         <div className="todoAppFooter row">
           <div className="todoAppCount col-xs-2 hidden-xs">{this.props.count} {this.props.count > 1 ? 'items left' : 'item left'}</div>
@@ -48,35 +56,36 @@ class TodoFilter extends React.Component {
 class TodoList extends React.Component {
 
   handleOnCheckbox(id, e) {
-    e.target.checked == true ? this.props.actions.isChecked(id, true) : this.props.actions.isChecked(id, false);
+    e.target.checked == this.props.actions.isChecked(id);
   }
 
   dblclick(e) {
     alert('dblclick');
   }
 
-  removeTodo(e) {
-    this.props.actions.removeTodo(e.target.id);
+  removeTodo(id, e) {
+    this.props.actions.removeTodo(id);
   }
 
   render() {
-    if (this.props.todos.filtered) {
+    console.log(this.props.todos);
+    if (this.props.todos) {
       return (
         <div>
           <ul>
             {
-              this.props.todos.filtered.map((todo) => {
+              this.props.todos.map((todo) => {
                 return (
                   <li key={todo.id}>
                     <input id={todo.id} ref="checkbox" type="checkbox" checked={todo.isChecked} onChange={this.handleOnCheckbox.bind(this, todo.id)} />
                     <label ref="todoName" className={todo.isChecked ? 'lined-through' : ''} ondblclick="console.log('sss')" >{todo.name}</label>
-                    <div className="close"><fa id={todo.id} onClick={this.removeTodo.bind(this)}>&#215;</fa></div>
+                    <div className="close"><fa id={todo.id} onClick={this.removeTodo.bind(this, todo.id)}>&#215;</fa></div>
                   </li>
                 );
               })
             }
           </ul>
-          <TodoFilter count={this.props.todos.filtered.length} actions={this.props.actions} todos={this.props.todos} />
+          <TodoFilter count={this.props.todos.length} actions={this.props.actions} todos={this.props.todos} />
         </div>
       )
     }
@@ -92,7 +101,6 @@ class Landing extends React.Component {
 
     if (this.refs.input.value.length > 0) {
       this.props.actions.addTodo(this.refs.input.value);
-      this.props.actions.addActiveTodo(this.refs.input.value);
     }
 
     this.refs.input.value = '';
