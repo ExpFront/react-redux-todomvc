@@ -2,37 +2,58 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/todos';
+import * as types from '../constants/todosFilters';
 
-// import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../constants/todos';
-//
-// const TODO_FILTERS = {
-//   [SHOW_ALL]: () => true,
-//   [SHOW_ACTIVE]: node => !node.isChecked,
-//   [SHOW_COMPLETED]: node => node.isChecked
-// };
 
+const visibilityFilter = (
+  state = 'SHOW_ALL',
+  action
+) => {
+  switch (action.type) {
+    case 'SET_VISIBILITY_FILTER':
+      return action.filter;
+    default:
+      return state;
+  }
+};
+
+const getVisibleTodos = (
+  todos,
+  filter,
+) => {
+  switch (filter) {
+    case 'SHOW_ALL':
+      return todos;
+
+    case 'SHOW_ACTIVE':
+      return todos.filter(todo => todo.isChecked);
+
+    case 'SHOW_COMPLETED':
+      return todos.filter(todo => !todo.isChecked);
+  }
+};
 
 class TodoFilter extends React.Component {
 
   showAll(e) {
-    //const filtered = this.props.todos.filter(TODO_FILTERS[SHOW_ALL]);
-    e.target.nextSibling.classList.remove('selected');
-    e.target.classList.add('selected');
-    e.target.nextSibling.nextSibling.classList.remove('selected');
+    visibilityFilter(this.props.todos, {
+      type: 'SET_VISIBILITY_FILTER',
+      filter: 'SHOW_ALL',
+    });
   }
 
   showActive(e) {
-    e.target.previousSibling.classList.remove('selected');
-    e.target.classList.add('selected');
-    e.target.nextSibling.classList.remove('selected');
-    //const filtered = this.props.todos.filter(TODO_FILTERS[SHOW_ACTIVE]);
+    visibilityFilter(this.props.todos, {
+      type: 'SET_VISIBILITY_FILTER',
+      filter: 'SHOW_ACTIVE',
+    });
   }
 
   showCompleted(e) {
-    e.target.previousSibling.previousSibling.classList.remove('selected');
-    e.target.previousSibling.classList.remove('selected');
-    e.target.classList.add('selected');
-    //const filtered = this.props.todos.filter(TODO_FILTERS[SHOW_COMPLETED]);
+    visibilityFilter(this.props.todos, {
+      type: 'SET_VISIBILITY_FILTER',
+      filter: 'SHOW_COMPLETED',
+    });
   }
 
   render() {
@@ -41,7 +62,7 @@ class TodoFilter extends React.Component {
         <div className="todoAppFooter row">
           <div className="todoAppCount col-xs-2 hidden-xs">{this.props.count} {this.props.count > 1 ? 'items left' : 'item left'}</div>
           <div className="todoAppFilters col-xs-8 col-xs-offset-2 col-sm-offset-0">
-            <span className='filterAll selected' onClick={this.showAll.bind(this)}>All</span>
+            <span className='filterAll' onClick={this.showAll.bind(this)}>All</span>
             <span className='filterActive' onClick={this.showActive.bind(this)}>Active</span>
             <span className='filterCompleted' onClick={this.showCompleted.bind(this)}>Completed</span>
           </div>
@@ -56,11 +77,7 @@ class TodoFilter extends React.Component {
 class TodoList extends React.Component {
 
   handleOnCheckbox(id, e) {
-    e.target.checked == this.props.actions.isChecked(id);
-  }
-
-  dblclick(e) {
-    alert('dblclick');
+    e.target.checked == this.props.actions.toggleTodo(id);
   }
 
   removeTodo(id, e) {
@@ -68,7 +85,12 @@ class TodoList extends React.Component {
   }
 
   render() {
-    console.log(this.props.todos);
+
+    const visibleTodos = getVisibleTodos(
+      this.props.todos,
+      visibilityFilter
+    );
+
     if (this.props.todos) {
       return (
         <div>
@@ -78,7 +100,7 @@ class TodoList extends React.Component {
                 return (
                   <li key={todo.id}>
                     <input id={todo.id} ref="checkbox" type="checkbox" checked={todo.isChecked} onChange={this.handleOnCheckbox.bind(this, todo.id)} />
-                    <label ref="todoName" className={todo.isChecked ? 'lined-through' : ''} ondblclick="console.log('sss')" >{todo.name}</label>
+                    <label ref="todoName" className={todo.isChecked ? 'lined-through' : ''}>{todo.name}</label>
                     <div className="close"><fa id={todo.id} onClick={this.removeTodo.bind(this, todo.id)}>&#215;</fa></div>
                   </li>
                 );
