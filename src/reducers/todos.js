@@ -35,11 +35,7 @@ const todos = handleActions({
       case filterTypes.SHOW_ALL:
         return state;
       case filterTypes.SHOW_ACTIVE:
-        const active = state.all.filter(todo => !todo.isChecked);
-        return [
-          ...state,
-          active,
-        ];
+        return state.filter(todo => !todo.isChecked);
       case filterTypes.SHOW_COMPLETED:
         const completed = state.filter(todo => todo.isChecked);
         return completed;
