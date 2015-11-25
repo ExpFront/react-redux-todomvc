@@ -4,7 +4,7 @@ import {Provider} from 'react-redux';
 import createLogger from 'redux-logger';
 
 
-import TodosContainer from './todos';
+import Landing from './landing';
 import reducers from '../reducers';
 
 const logger = createLogger({
@@ -21,7 +21,7 @@ const store = compose(
 export default () => {
   return (
     <Provider store={store}>
-      <TodosContainer />
+      <Landing />
     </Provider>
   );
 };
