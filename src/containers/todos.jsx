@@ -2,58 +2,64 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/todos';
-import * as types from '../constants/todosFilters';
+import * as filterTypes from '../constants/todosFilters'
 
 
-const visibilityFilter = (
-  state = 'SHOW_ALL',
-  action
-) => {
-  switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return action.filter;
-    default:
-      return state;
-  }
-};
 
-const getVisibleTodos = (
-  todos,
-  filter,
-) => {
-  switch (filter) {
-    case 'SHOW_ALL':
-      return todos;
 
-    case 'SHOW_ACTIVE':
-      return todos.filter(todo => todo.isChecked);
-
-    case 'SHOW_COMPLETED':
-      return todos.filter(todo => !todo.isChecked);
-  }
-};
+// const visibilityFilter = (
+//   state = types.SHOW_ALL,
+//   action
+// ) => {
+//   switch (action.type) {
+//     case 'SET_VISIBILITY_FILTER':
+//       return action.filter;
+//     default:
+//       return state;
+//   }
+// };
+//
+// const getVisibleTodos = (
+//   todos,
+//   filter,
+// ) => {
+//   switch (filter) {
+//     case types.SHOW_ALL:
+//       return todos;
+//
+//     case types.SHOW_ACTIVE:
+//       return todos.filter(todo => todo.isChecked);
+//
+//     case types.SHOW_COMPLETED:
+//       return todos.filter(todo => !todo.isChecked);
+//   }
+// };
 
 class TodoFilter extends React.Component {
 
-  showAll(e) {
-    visibilityFilter(this.props.todos, {
-      type: 'SET_VISIBILITY_FILTER',
-      filter: 'SHOW_ALL',
-    });
-  }
+  // showAll(e) {
+  //   visibilityFilter(this.props.todos, {
+  //     type: 'SET_VISIBILITY_FILTER',
+  //     filter: types.SHOW_ALL,
+  //   });
+  // }
+  //
+  // showActive(e) {
+  //   visibilityFilter(this.props.todos, {
+  //     type: 'SET_VISIBILITY_FILTER',
+  //     filter: types.SHOW_ACTIVE,
+  //   });
+  // }
+  //
+  // showCompleted(e) {
+  //   visibilityFilter(this.props.todos, {
+  //     type: 'SET_VISIBILITY_FILTER',
+  //     filter: types.SHOW_COMPLETED,
+  //   });
+  // }
 
-  showActive(e) {
-    visibilityFilter(this.props.todos, {
-      type: 'SET_VISIBILITY_FILTER',
-      filter: 'SHOW_ACTIVE',
-    });
-  }
-
-  showCompleted(e) {
-    visibilityFilter(this.props.todos, {
-      type: 'SET_VISIBILITY_FILTER',
-      filter: 'SHOW_COMPLETED',
-    });
+  filterTodos(filter) {
+    this.props.actions.filterTodos(filter);
   }
 
   render() {
@@ -62,9 +68,9 @@ class TodoFilter extends React.Component {
         <div className="todoAppFooter row">
           <div className="todoAppCount col-xs-2 hidden-xs">{this.props.count} {this.props.count > 1 ? 'items left' : 'item left'}</div>
           <div className="todoAppFilters col-xs-8 col-xs-offset-2 col-sm-offset-0">
-            <span className='filterAll' onClick={this.showAll.bind(this)}>All</span>
-            <span className='filterActive' onClick={this.showActive.bind(this)}>Active</span>
-            <span className='filterCompleted' onClick={this.showCompleted.bind(this)}>Completed</span>
+            <span className='filterAll' onClick={this.filterTodos.bind(this, filterTypes.SHOW_ALL)}>All</span>
+            <span className='filterActive' onClick={this.filterTodos.bind(this, filterTypes.SHOW_ACTIVE)}>Active</span>
+            <span className='filterCompleted' onClick={this.filterTodos.bind(this, filterTypes.SHOW_COMPLETED)}>Completed</span>
           </div>
         </div>
       )
@@ -86,10 +92,10 @@ class TodoList extends React.Component {
 
   render() {
 
-    const visibleTodos = getVisibleTodos(
-      this.props.todos,
-      visibilityFilter
-    );
+    // const visibleTodos = getVisibleTodos(
+    //   this.props.todos,
+    //   this.props.visibilityFilter
+    // );
 
     if (this.props.todos) {
       return (

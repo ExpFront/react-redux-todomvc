@@ -1,5 +1,6 @@
 import { handleActions } from 'redux-actions';
 import * as types from '../constants/todos';
+import * as filterTypes from '../constants/todosFilters';
 
 const initialState = [];
 
@@ -28,6 +29,22 @@ const todos = handleActions({
   [types.REMOVE_TODO]: (state, action) => {
     return state.filter(todo => todo.id !== action.id);
   },
+
+  [types.FILTER_TODOS]: (state, action) => {
+    switch (action.filter) {
+      case filterTypes.SHOW_ALL:
+        return state;
+      case filterTypes.SHOW_ACTIVE:
+        const active = state.all.filter(todo => !todo.isChecked);
+        return [
+          ...state,
+          active,
+        ];
+      case filterTypes.SHOW_COMPLETED:
+        const completed = state.filter(todo => todo.isChecked);
+        return completed;
+    };
+  }
 
 }, initialState);
 

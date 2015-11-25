@@ -16,10 +16,16 @@ export function removeTodo(id) {
   };
 }
 
-export function toggleTodo(id, flag) {
+export function toggleTodo(id) {
   return {
     type: types.TOGGLE_TODO,
     id,
-    flag,
+  };
+}
+
+export function filterTodos(filter) {
+  return {
+    type: types.FILTER_TODOS,
+    filter,
   };
 }
