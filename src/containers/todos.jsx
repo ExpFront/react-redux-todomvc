@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/todos';
 
-import TodoForm from '../components/todoForm';
-import TodoList from '../components/todoList';
+import TodoForm from '../components/todos/todoForm';
+import TodoList from '../components/todos/todoList';
 
 
 class TodosContainer extends React.Component  {
