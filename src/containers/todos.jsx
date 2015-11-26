@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '../actions/todos';
 
-import TodoForm from '../components/todos/todoForm';
-import TodoList from '../components/todos/todoList';
+import TodoForm from '../components/todos/form';
+import TodoList from '../components/todos/list';
 
 
 class TodosContainer extends React.Component  {
@@ -12,7 +12,7 @@ class TodosContainer extends React.Component  {
   render() {
     return (
       <div className="todoApp">
-        <TodoForm actions={this.props.actions} todos={this.props.todos}/>
+        <TodoForm actions={this.props.actions} />
         <div className="searchMenuField">
           <TodoList actions={this.props.actions} todos={this.props.todos} />
         </div>
@@ -30,7 +30,7 @@ function selectState(state) {
 
 function passActions(dispatch) {
   return {
-    actions: bindActionCreators({ ...actions }, dispatch),
+    actions: bindActionCreators(actions, dispatch),
   };
 }
 

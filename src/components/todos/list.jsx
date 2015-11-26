@@ -1,7 +1,13 @@
 import React from 'react';
-import * as filterTypes from '../../constants/todosFilters';
 
-import TodoFilter from './todoFilter';
+import TodoFilter from './filter';
+
+
+const TODO_FILTERS = {
+  [`all`]: () => true,
+  [`active`]: todo => !todo.isChecked,
+  [`completed`]: todo => todo.isChecked,
+};
 
 class TodoList extends React.Component {
 
@@ -15,12 +21,14 @@ class TodoList extends React.Component {
 
   render() {
 
-    if (this.props.todos) {
+    const filteredTodos = this.props.todos.items.filter(TODO_FILTERS[this.props.todos.filterBy]);
+
+    if (this.props.todos.items.length > 0) {
       return (
         <div>
           <ul>
             {
-              this.props.todos.map((todo) => {
+              filteredTodos.map((todo) => {
                 return (
                   <li key={todo.id}>
                     <input id={todo.id} ref="checkbox" type="checkbox" checked={todo.isChecked} onChange={this.handleOnCheckbox.bind(this, todo.id)} />
@@ -31,7 +39,7 @@ class TodoList extends React.Component {
               })
             }
           </ul>
-          <TodoFilter count={this.props.todos.length} actions={this.props.actions} todos={this.props.todos} />
+          <TodoFilter filteredTodos={filteredTodos} actions={this.props.actions} todos={this.props.todos} />
         </div>
       )
     }

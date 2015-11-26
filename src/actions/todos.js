@@ -23,9 +23,9 @@ export function toggleTodo(id) {
   };
 }
 
-export function filterTodos(filter) {
+export function filterTodos(value) {
   return {
     type: types.FILTER_TODOS,
-    filter,
+    by: value,
   };
 }

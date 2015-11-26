@@ -1,44 +1,64 @@
 import { handleActions } from 'redux-actions';
 import * as types from '../constants/todos';
-import * as filterTypes from '../constants/todosFilters';
 
-const initialState = [];
+const initialState = {
+  items: [],
+  filterBy: 'all',
+};
 
 
 const todos = handleActions({
 
   [types.ADD_TODO]: (state, action) => {
 
-    const all = {
-      id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+    const items = state.items.push({
+      id: state.items.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
       name: action.text,
       isChecked: false
-    };
+    });
 
-    return [
+    return {
       ...state,
-      all,
-    ];
+      ...items,
+    };
   },
 
   [types.TOGGLE_TODO]: (state, action) => {
-    return state.map((todo) =>
+    const items = state.items.map(todo =>
       todo.id === action.id ? { ...todo, isChecked: !todo.isChecked } : todo)
+
+    return {
+      ...state,
+      items,
+    };
   },
 
   [types.REMOVE_TODO]: (state, action) => {
-    return state.filter(todo => todo.id !== action.id);
+    const items = state.items.filter(todo => todo.id !== action.id);
+
+    return {
+      ...state,
+      items,
+    };
   },
 
   [types.FILTER_TODOS]: (state, action) => {
-    switch (action.filter) {
-      case filterTypes.SHOW_ALL:
-        return state;
-      case filterTypes.SHOW_ACTIVE:
-        return state.filter(todo => !todo.isChecked);
-      case filterTypes.SHOW_COMPLETED:
-        const completed = state.filter(todo => todo.isChecked);
-        return completed;
+    switch (action.by) {
+      case 'all':
+        return {
+          ...state,
+          filterBy: 'all'
+        };
+      case 'active':
+        return {
+          ...state,
+          filterBy: 'active'
+        };
+      case 'completed':
+        return {
+          ...state,
+          filterBy: 'completed'
+        };
     };
   }
 
