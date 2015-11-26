@@ -11,15 +11,15 @@ const todos = handleActions({
 
   [types.ADD_TODO]: (state, action) => {
 
-    const items = state.items.push({
+    const items = [...state.items, {
       id: state.items.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
       name: action.text,
       isChecked: false
-    });
+    }];
 
     return {
       ...state,
-      ...items,
+      items,
     };
   },
 
