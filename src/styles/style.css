@@ -1,104 +1,104 @@
 body {
-	background-color: #F5F5F5;
+  background-color: #F5F5F5;
 }
 
 .section-intro {
-	height: 100vh;
-	width: 100vw;
-	background-size: cover;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .h2-intro {
-	margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .todoApp {
-	width: 100%;
-	box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 .input-group {
-	width: 100.2%;
+  width: 100.2%;
 }
 
 .searchMenuField {
-	width: 100%;
-	height: auto;
-	background-color: #FFF;
+  width: 100%;
+  height: auto;
+  background-color: #FFF;
 }
 
 .searchMenuField ul {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .searchMenuField ul li {
-	background-color: #FFF;
-	border-bottom: 1px solid #ededed;
-	padding: 8px;
-	cursor: pointer;
+  background-color: #FFF;
+  border-bottom: 1px solid #ededed;
+  padding: 8px;
+  cursor: pointer;
 }
 
 .searchMenuField ul li:hover {
-	background-color: #F5F5F5;
+  background-color: #F5F5F5;
 }
 
 .close {
-	float: right;
-	display: block;
-	visibility: hidden;
+  float: right;
+  display: block;
+  visibility: hidden;
 }
 
 fa {
-	width: 10px;
-	height: 10px;
-	font-size: 20px;
-	color: #cc9a9a;
-	margin-bottom: 11px;
-	transition: color 0.2s -out;
+  width: 10px;
+  height: 10px;
+  font-size: 20px;
+  color: #cc9a9a;
+  margin-bottom: 11px;
+  transition: color 0.2s -out;
 }
 
 fa:hover {
-	color: rgb(175, 47, 47);
+  color: rgb(175, 47, 47);
 }
 
 .searchMenuField ul li:hover .close {
-	visibility: visible;
+  visibility: visible;
 }
 
 label {
-	transition: color 0.4s;
-	margin-left: 5px;
+  transition: color 0.4s;
+  margin-left: 5px;
 }
 
 .lined-through {
-	text-decoration: line-through;
-	color: #A5A2A2;
-	transition: color 0.4s;
+  text-decoration: line-through;
+  color: #A5A2A2;
+  transition: color 0.4s;
 }
 
 .todoAppFooter {
-	padding: 8px 0 8px 0;
+  padding: 8px 0 8px 0;
 }
 
 .todoAppCount {
-	display: block;
-	float: left;
+  display: block;
+  float: left;
 }
 
 .todoAppFilters span {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .todoAppFilters .filterActive {
-	margin: 0 8px;
+  margin: 0 8px;
 }
 
 .selected {
-	border: 1px solid rgba(175, 47, 47, 0.2);
-	padding: 3px 5px;
-	border-radius: 3px;
+  border: 1px solid rgba(175, 47, 47, 0.2);
+  padding: 3px 5px;
+  border-radius: 3px;
 }
