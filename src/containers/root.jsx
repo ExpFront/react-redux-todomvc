@@ -19,7 +19,6 @@ const store = compose(
   persistState(),
 )(createStore)(reducer);
 
-
 export default () => {
   return (
     <Provider store={store}>

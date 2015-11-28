@@ -22,7 +22,6 @@ class TodoList extends React.Component {
   render() {
 
     const filteredTodos = this.props.todos.items.filter(TODO_FILTERS[this.props.todos.filterBy]);
-
     if (this.props.todos.items.length > 0) {
       return (
         <div>

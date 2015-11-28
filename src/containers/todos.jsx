@@ -6,7 +6,6 @@ import * as actions from '../actions/todos';
 import TodoForm from '../components/todos/form';
 import TodoList from '../components/todos/list';
 
-
 class TodosContainer extends React.Component  {
 
   render() {
@@ -21,11 +20,8 @@ class TodosContainer extends React.Component  {
   }
 };
 
-
-function selectState(state) {
-  return {
-    todos: state.todos,
-  };
+function selectState({todos}) {
+  return { todos };
 }
 
 function passActions(dispatch) {

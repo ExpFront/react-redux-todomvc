@@ -16,7 +16,7 @@ body {
 
 .todoApp {
 	width: 100%;
-  box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 10px 10px 0px rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 .input-group {
@@ -46,13 +46,11 @@ body {
 	background-color: #F5F5F5;
 }
 
-
 .close {
 	float: right;
 	display: block;
 	visibility: hidden;
 }
-
 
 fa {
 	width: 10px;
@@ -73,7 +71,7 @@ fa:hover {
 
 label {
 	transition: color 0.4s;
-  margin-left: 5px;
+	margin-left: 5px;
 }
 
 .lined-through {
@@ -84,7 +82,6 @@ label {
 
 .todoAppFooter {
 	padding: 8px 0 8px 0;
-
 }
 
 .todoAppCount {
@@ -95,7 +92,6 @@ label {
 .todoAppFilters span {
 	cursor: pointer;
 }
-
 
 .todoAppFilters .filterActive {
 	margin: 0 8px;

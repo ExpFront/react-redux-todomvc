@@ -6,10 +6,9 @@ const initialState = {
   filterBy: 'all',
 };
 
-
 const todos = handleActions({
 
-  [types.ADD_TODO]: (state, action) => {
+  [types.ADD]: (state, action) => {
 
     const items = [...state.items, {
       id: state.items.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
@@ -23,7 +22,7 @@ const todos = handleActions({
     };
   },
 
-  [types.TOGGLE_TODO]: (state, action) => {
+  [types.TOGGLE]: (state, action) => {
     const items = state.items.map(todo =>
       todo.id === action.id ? { ...todo, isChecked: !todo.isChecked } : todo)
 
@@ -33,7 +32,7 @@ const todos = handleActions({
     };
   },
 
-  [types.REMOVE_TODO]: (state, action) => {
+  [types.REMOVE]: (state, action) => {
     const items = state.items.filter(todo => todo.id !== action.id);
 
     return {
@@ -42,25 +41,13 @@ const todos = handleActions({
     };
   },
 
-  [types.FILTER_TODOS]: (state, action) => {
-    switch (action.by) {
-      case 'all':
-        return {
-          ...state,
-          filterBy: 'all'
-        };
-      case 'active':
-        return {
-          ...state,
-          filterBy: 'active'
-        };
-      case 'completed':
-        return {
-          ...state,
-          filterBy: 'completed'
-        };
+  [types.FILTER]: (state, action) => {
+
+    return {
+      ...state,
+      filterBy: action.by
     };
-  }
+  },
 
 }, initialState);
 
