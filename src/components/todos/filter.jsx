@@ -1,11 +1,11 @@
 import React from 'react';
 
 
-const TodoFilter = React.createClass ({
+class TodoFilter extends React.Component {
 
   filterTodos(value, e) {
     this.props.actions.filterTodos(value);
-  },
+  }
 
   render() {
     if (this.props.todos) {
@@ -23,6 +23,6 @@ const TodoFilter = React.createClass ({
 
     return null;
   }
-});
+};
 
 export default TodoFilter;
